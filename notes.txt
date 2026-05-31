@@ -1,0 +1,8 @@
+cd D:\Apps\AISolutions
+git status
+git add .
+git commit -m "changed to Subh"
+git push origin main
+git tag v1.1 -m "v1.1: changed to Subh"
+git push origin v1.1
+
