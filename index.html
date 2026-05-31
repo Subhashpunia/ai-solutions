@@ -1,0 +1,2009 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Subh AI Solutions — Business AI Transformation</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  /* Bookman Old Style: use system font if available, fall back to Libre Baskerville */
+  @font-face {
+    font-family: 'Bookman Old Style';
+    src: local('Bookman Old Style'), local('BookmanOldStyle'), local('Bookman');
+    font-weight: 400 900;
+    font-style: normal;
+  }
+</style>
+<style>
+:root {
+  --bg: #050810;
+  --bg2: #080d1a;
+  --bg3: #0d1526;
+  --surface: #111827;
+  --surface2: #1a2540;
+  --cyan: #00d4ff;
+  --cyan-dim: #00a8cc;
+  --green: #00ff9d;
+  --amber: #ffbe00;
+  --text: #e8edf8;
+  --text-dim: #8899b8;
+  --text-mute: #4a5878;
+  --border: rgba(0,212,255,0.12);
+  --border2: rgba(255,255,255,0.06);
+  --glow: 0 0 40px rgba(0,212,255,0.15);
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 16px;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+/* ── NOISE OVERLAY ── */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 1000;
+  opacity: 0.4;
+}
+
+/* ── NAV ── */
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 900;
+  padding: 0 5%;
+  height: 72px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: rgba(5, 8, 16, 0.85);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border2);
+}
+
+.nav-logo {
+  font-family: 'Bookman Old Style', 'Bookman', 'Libre Baskerville', 'URW Bookman L', Georgia, serif;
+  font-weight: 800;
+  font-size: 1.2rem;
+  letter-spacing: -0.02em;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.nav-logo span {
+  color: var(--cyan);
+}
+
+.logo-badge {
+  width: 32px; height: 32px;
+  background: linear-gradient(135deg, var(--cyan), #0066ff);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: #fff;
+  font-family: 'JetBrains Mono', monospace;
+}
+
+.nav-links {
+  display: flex;
+  gap: 36px;
+  list-style: none;
+}
+
+.nav-links a {
+  color: var(--text-dim);
+  text-decoration: none;
+  font-size: 0.88rem;
+  font-weight: 500;
+  transition: color 0.2s;
+  letter-spacing: 0.02em;
+}
+
+.nav-links a:hover { color: var(--cyan); }
+
+.nav-cta {
+  background: var(--cyan);
+  color: #000 !important;
+  padding: 8px 20px;
+  border-radius: 6px;
+  font-weight: 600 !important;
+  font-size: 0.85rem !important;
+  transition: opacity 0.2s, transform 0.2s !important;
+}
+
+.nav-cta:hover { opacity: 0.88; transform: translateY(-1px); color: #000 !important; }
+
+/* ── HERO ── */
+.hero {
+  min-height: 100vh;
+  padding: 120px 5% 80px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Animated grid bg */
+.hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: 
+    linear-gradient(rgba(0,212,255,0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0,212,255,0.04) 1px, transparent 1px);
+  background-size: 60px 60px;
+  mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 20%, transparent 100%);
+}
+
+/* Glow orbs */
+.hero-orb1 {
+  position: absolute;
+  width: 600px; height: 600px;
+  background: radial-gradient(circle, rgba(0,102,255,0.18) 0%, transparent 70%);
+  top: -100px; right: -100px;
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.hero-orb2 {
+  position: absolute;
+  width: 400px; height: 400px;
+  background: radial-gradient(circle, rgba(0,212,255,0.1) 0%, transparent 70%);
+  bottom: 0; left: 10%;
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.hero-left {
+  position: relative;
+  z-index: 2;
+}
+
+.hero-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(0,212,255,0.08);
+  border: 1px solid rgba(0,212,255,0.25);
+  padding: 6px 14px;
+  border-radius: 100px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.72rem;
+  color: var(--cyan);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: 28px;
+  animation: fadeUp 0.8s ease both;
+}
+
+.pulse-dot {
+  width: 6px; height: 6px;
+  background: var(--green);
+  border-radius: 50%;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(0,255,157,0.4); }
+  50% { opacity: 0.7; box-shadow: 0 0 0 6px rgba(0,255,157,0); }
+}
+
+.hero h1 {
+  font-family: 'Bookman Old Style', 'Bookman', 'Libre Baskerville', 'URW Bookman L', Georgia, serif;
+  font-weight: 800;
+  font-size: clamp(1.6rem, 3vw, 2.4rem);
+  line-height: 1.12;
+  letter-spacing: -0.03em;
+  margin-bottom: 24px;
+  animation: fadeUp 0.8s 0.15s ease both;
+}
+
+.hero h1 em {
+  font-style: normal;
+  color: var(--cyan);
+}
+
+.hero h1 .line-break { display: block; }
+
+.hero-sub {
+  font-size: 1.05rem;
+  color: var(--text-dim);
+  max-width: 480px;
+  line-height: 1.75;
+  margin-bottom: 40px;
+  font-weight: 300;
+  animation: fadeUp 0.8s 0.3s ease both;
+}
+
+.hero-ctas {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  animation: fadeUp 0.8s 0.45s ease both;
+}
+
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--cyan);
+  color: #000;
+  font-family: 'Bookman Old Style', 'Bookman', 'Libre Baskerville', 'URW Bookman L', Georgia, serif;
+  font-weight: 700;
+  font-size: 0.92rem;
+  padding: 14px 28px;
+  border-radius: 8px;
+  text-decoration: none;
+  letter-spacing: 0.01em;
+  transition: transform 0.2s, box-shadow 0.2s, opacity 0.2s;
+  box-shadow: 0 0 0 0 rgba(0,212,255,0.5);
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 40px rgba(0,212,255,0.35);
+}
+
+.btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: transparent;
+  color: var(--text);
+  font-family: 'Bookman Old Style', 'Bookman', 'Libre Baskerville', 'URW Bookman L', Georgia, serif;
+  font-weight: 600;
+  font-size: 0.92rem;
+  padding: 14px 28px;
+  border-radius: 8px;
+  text-decoration: none;
+  border: 1px solid var(--border);
+  transition: border-color 0.2s, color 0.2s, background 0.2s;
+}
+
+.btn-secondary:hover {
+  border-color: var(--cyan);
+  color: var(--cyan);
+  background: rgba(0,212,255,0.05);
+}
+
+/* ── STATS STRIP ── */
+.hero-stats {
+  display: flex;
+  gap: 36px;
+  margin-top: 56px;
+  padding-top: 40px;
+  border-top: 1px solid var(--border2);
+  animation: fadeUp 0.8s 0.6s ease both;
+}
+
+.stat-item { }
+.stat-num {
+  font-family: 'Bookman Old Style', 'Bookman', 'Libre Baskerville', 'URW Bookman L', Georgia, serif;
+  font-weight: 800;
+  font-size: 1.9rem;
+  color: var(--cyan);
+  line-height: 1;
+  letter-spacing: -0.03em;
+}
+.stat-label {
+  font-size: 0.78rem;
+  color: var(--text-mute);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-top: 4px;
+}
+
+/* ── HERO IMAGE FRAME ── */
+.hero-image-frame {
+  position: relative;
+  border-radius: 20px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  box-shadow: 0 32px 80px rgba(0,0,0,0.6), var(--glow);
+  background: #050810;
+}
+
+.hero-minion-svg {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.hero-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  filter: brightness(0.75) saturate(1.1);
+  transition: filter 0.5s;
+}
+
+.hero-image-frame:hover .hero-img {
+  filter: brightness(0.85) saturate(1.2);
+}
+
+.hero-img-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    135deg,
+    rgba(0,20,60,0.2) 0%,
+    transparent 60%
+  );
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Top-left cyan line accent */
+.hero-image-frame::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--cyan), transparent 60%);
+  z-index: 3;
+}
+
+/* Floating stat chips over image */
+.img-stat-chip {
+  position: absolute;
+  z-index: 4;
+  background: rgba(8, 13, 26, 0.82);
+  backdrop-filter: blur(12px);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 10px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  animation: float 4s ease-in-out infinite;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.5);
+}
+
+.chip-tl { top: 18px; left: 18px; animation-delay: 0s; }
+.chip-br { bottom: 70px; right: 18px; animation-delay: -2s; }
+
+.chip-val {
+  font-family: 'Bookman Old Style', 'Bookman', 'Libre Baskerville', 'URW Bookman L', Georgia, serif;
+  font-weight: 800;
+  font-size: 1.3rem;
+  line-height: 1;
+  letter-spacing: -0.03em;
+}
+.chip-val.cyan { color: var(--cyan); }
+.chip-val.green { color: var(--green); }
+
+.chip-lbl {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.62rem;
+  color: var(--text-mute);
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+}
+
+/* Workflow bar at bottom of image */
+.img-workflow-bar {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  z-index: 4;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 12px 18px;
+  background: rgba(5, 8, 16, 0.78);
+  backdrop-filter: blur(12px);
+  border-top: 1px solid var(--border2);
+  overflow: hidden;
+}
+
+/* ── DASHBOARD VISUAL ── */
+.hero-right {
+  position: relative;
+  z-index: 2;
+  animation: fadeIn 1s 0.3s ease both;
+}
+
+.dashboard-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 24px;
+  position: relative;
+  box-shadow: 0 32px 80px rgba(0,0,0,0.6), var(--glow);
+  overflow: hidden;
+}
+
+.dashboard-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--cyan), transparent);
+}
+
+.dash-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.dash-title {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.72rem;
+  color: var(--text-mute);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.dash-status {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.68rem;
+  color: var(--green);
+}
+
+.dash-status::before {
+  content: '';
+  width: 6px; height: 6px;
+  background: var(--green);
+  border-radius: 50%;
+  animation: pulse 2s infinite;
+}
+
+/* Metric cards in dashboard */
+.dash-metrics {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.metric-card {
+  background: var(--bg3);
+  border: 1px solid var(--border2);
+  border-radius: 10px;
+  padding: 14px;
+}
+
+.metric-val {
+  font-family: 'Bookman Old Style', 'Bookman', 'Libre Baskerville', 'URW Bookman L', Georgia, serif;
+  font-weight: 800;
+  font-size: 1.5rem;
+  line-height: 1;
+  margin-bottom: 4px;
+}
+
+.metric-val.cyan { color: var(--cyan); }
+.metric-val.green { color: var(--green); }
+.metric-val.amber { color: var(--amber); }
+
+.metric-label {
+  font-size: 0.7rem;
+  color: var(--text-mute);
+  letter-spacing: 0.03em;
+}
+
+.metric-trend {
+  font-size: 0.65rem;
+  color: var(--green);
+  margin-top: 6px;
+  font-family: 'JetBrains Mono', monospace;
+}
+
+/* Chat simulation */
+.dash-chat {
+  background: var(--bg2);
+  border-radius: 10px;
+  padding: 14px;
+  margin-bottom: 12px;
+}
+
+.chat-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.65rem;
+  color: var(--text-mute);
+  margin-bottom: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.chat-msg {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 8px;
+  align-items: flex-start;
+}
+
+.chat-avatar {
+  width: 24px; height: 24px;
+  border-radius: 6px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.6rem;
+  font-weight: 700;
+  font-family: 'JetBrains Mono', monospace;
+}
+
+.chat-avatar.user { background: rgba(255,190,0,0.15); color: var(--amber); }
+.chat-avatar.bot { background: rgba(0,212,255,0.15); color: var(--cyan); }
+
+.chat-bubble {
+  background: var(--surface);
+  border-radius: 8px;
+  padding: 7px 11px;
+  font-size: 0.74rem;
+  color: var(--text-dim);
+  max-width: 220px;
+  line-height: 1.4;
+}
+
+.chat-bubble.bot-bubble {
+  background: rgba(0,212,255,0.08);
+  border: 1px solid rgba(0,212,255,0.15);
+  color: var(--text);
+}
+
+/* Workflow connector */
+.dash-workflow {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 14px;
+  background: var(--bg3);
+  border-radius: 8px;
+  border: 1px solid var(--border2);
+  overflow: hidden;
+}
+
+.workflow-node {
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 5px 9px;
+  font-size: 0.65rem;
+  font-family: 'JetBrains Mono', monospace;
+  color: var(--cyan);
+  white-space: nowrap;
+}
+
+.workflow-arrow {
+  color: var(--text-mute);
+  font-size: 0.7rem;
+  flex-shrink: 0;
+}
+
+/* Floating badge */
+.float-badge {
+  position: absolute;
+  background: var(--surface2);
+  border: 1px solid rgba(0,255,157,0.25);
+  border-radius: 10px;
+  padding: 10px 14px;
+  font-size: 0.72rem;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.5);
+  animation: float 4s ease-in-out infinite;
+}
+
+.float-badge.badge1 {
+  top: -20px; right: -20px;
+}
+
+.float-badge.badge2 {
+  bottom: 40px; left: -30px;
+  animation-delay: -2s;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
+.badge-icon {
+  width: 28px; height: 28px;
+  border-radius: 7px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.9rem;
+}
+
+.badge-icon.green-bg { background: rgba(0,255,157,0.12); }
+.badge-icon.cyan-bg { background: rgba(0,212,255,0.12); }
+
+.badge-text strong {
+  display: block;
+  font-weight: 600;
+  color: var(--text);
+  font-size: 0.72rem;
+}
+.badge-text span {
+  color: var(--text-mute);
+  font-size: 0.65rem;
+}
+
+/* ── ANIMATIONS ── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* ── PROBLEM SECTION ── */
+.section {
+  padding: 100px 5%;
+  position: relative;
+}
+
+.section-eyebrow {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.7rem;
+  color: var(--cyan);
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.section-eyebrow::before {
+  content: '';
+  width: 24px;
+  height: 1px;
+  background: var(--cyan);
+}
+
+.section-title {
+  font-family: 'Bookman Old Style', 'Bookman', 'Libre Baskerville', 'URW Bookman L', Georgia, serif;
+  font-weight: 800;
+  font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+  letter-spacing: -0.03em;
+  line-height: 1.1;
+  margin-bottom: 16px;
+}
+
+.section-sub {
+  color: var(--text-dim);
+  font-size: 1rem;
+  max-width: 520px;
+  line-height: 1.7;
+  font-weight: 300;
+}
+
+/* ── PROBLEMS ── */
+.problems-section {
+  background: var(--bg2);
+  border-top: 1px solid var(--border2);
+  border-bottom: 1px solid var(--border2);
+}
+
+.problems-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1px;
+  background: var(--border2);
+  border-radius: 16px;
+  overflow: hidden;
+  margin-top: 60px;
+  border: 1px solid var(--border2);
+}
+
+.problem-card {
+  background: var(--bg2);
+  padding: 36px 32px;
+  position: relative;
+  transition: background 0.3s;
+}
+
+.problem-card:hover {
+  background: var(--surface);
+}
+
+.problem-icon {
+  font-size: 2rem;
+  margin-bottom: 16px;
+  display: block;
+}
+
+.problem-title {
+  font-family: 'Bookman Old Style', 'Bookman', 'Libre Baskerville', 'URW Bookman L', Georgia, serif;
+  font-weight: 700;
+  font-size: 1rem;
+  margin-bottom: 8px;
+  letter-spacing: -0.01em;
+}
+
+.problem-desc {
+  font-size: 0.85rem;
+  color: var(--text-mute);
+  line-height: 1.6;
+}
+
+.problem-card::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--cyan), transparent);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.3s;
+}
+
+.problem-card:hover::after {
+  transform: scaleX(1);
+}
+
+/* ── SERVICES ── */
+.services-header {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: end;
+  margin-bottom: 64px;
+}
+
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+}
+
+.service-card {
+  background: var(--surface);
+  border: 1px solid var(--border2);
+  border-radius: 16px;
+  padding: 36px;
+  position: relative;
+  overflow: hidden;
+  transition: border-color 0.3s, transform 0.3s, box-shadow 0.3s;
+  cursor: default;
+}
+
+.service-card:hover {
+  border-color: var(--border);
+  transform: translateY(-4px);
+  box-shadow: 0 20px 60px rgba(0,0,0,0.4), 0 0 0 1px rgba(0,212,255,0.08);
+}
+
+.service-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(0,212,255,0.3), transparent);
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.service-card:hover::before { opacity: 1; }
+
+.service-icon-wrap {
+  width: 52px; height: 52px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  margin-bottom: 20px;
+}
+
+.service-icon-wrap.s1 { background: rgba(0,212,255,0.1); }
+.service-icon-wrap.s2 { background: rgba(0,255,157,0.1); }
+.service-icon-wrap.s3 { background: rgba(255,190,0,0.1); }
+.service-icon-wrap.s4 { background: rgba(160,100,255,0.1); }
+
+.service-name {
+  font-family: 'Bookman Old Style', 'Bookman', 'Libre Baskerville', 'URW Bookman L', Georgia, serif;
+  font-weight: 700;
+  font-size: 1.1rem;
+  letter-spacing: -0.01em;
+  margin-bottom: 10px;
+}
+
+.service-desc {
+  font-size: 0.84rem;
+  color: var(--text-mute);
+  margin-bottom: 20px;
+  line-height: 1.65;
+}
+
+.service-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.tag {
+  font-size: 0.72rem;
+  font-family: 'JetBrains Mono', monospace;
+  padding: 4px 10px;
+  border-radius: 100px;
+  border: 1px solid var(--border2);
+  color: var(--text-dim);
+  letter-spacing: 0.02em;
+}
+
+/* ── RESULTS ── */
+.results-section {
+  background: var(--bg2);
+}
+
+.results-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.6fr;
+  gap: 80px;
+  align-items: center;
+}
+
+.results-list {
+  margin-top: 40px;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.result-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  font-size: 0.95rem;
+  color: var(--text-dim);
+  line-height: 1.5;
+}
+
+.result-check {
+  width: 22px; height: 22px;
+  background: rgba(0,255,157,0.1);
+  border: 1px solid rgba(0,255,157,0.3);
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.7rem;
+  color: var(--green);
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+/* Big metrics */
+.metrics-showcase {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+
+.metric-showcase-card {
+  background: var(--surface);
+  border: 1px solid var(--border2);
+  border-radius: 16px;
+  padding: 32px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  transition: border-color 0.3s;
+}
+
+.metric-showcase-card:hover { border-color: var(--border); }
+
+.metric-showcase-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 50%;
+  transform: translateX(-50%);
+  width: 80px; height: 80px;
+  border-radius: 50%;
+  filter: blur(30px);
+}
+
+.metric-showcase-card.m1::before { background: var(--cyan); opacity: 0.12; }
+.metric-showcase-card.m2::before { background: var(--green); opacity: 0.12; }
+.metric-showcase-card.m3::before { background: var(--amber); opacity: 0.12; }
+.metric-showcase-card.m4::before { background: #a064ff; opacity: 0.12; }
+
+.showcase-val {
+  font-family: 'Bookman Old Style', 'Bookman', 'Libre Baskerville', 'URW Bookman L', Georgia, serif;
+  font-weight: 800;
+  font-size: 3rem;
+  letter-spacing: -0.04em;
+  line-height: 1;
+  margin-bottom: 8px;
+}
+
+.m1 .showcase-val { color: var(--cyan); }
+.m2 .showcase-val { color: var(--green); }
+.m3 .showcase-val { color: var(--amber); }
+.m4 .showcase-val { color: #a064ff; }
+
+.showcase-label {
+  font-size: 0.8rem;
+  color: var(--text-mute);
+  font-weight: 300;
+}
+
+/* ── CASE STUDIES ── */
+.cases-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  margin-top: 60px;
+}
+
+.case-card {
+  background: var(--surface);
+  border: 1px solid var(--border2);
+  border-radius: 16px;
+  overflow: hidden;
+  transition: transform 0.3s, border-color 0.3s, box-shadow 0.3s;
+}
+
+.case-card:hover {
+  transform: translateY(-6px);
+  border-color: var(--border);
+  box-shadow: 0 24px 60px rgba(0,0,0,0.5);
+}
+
+.case-header {
+  padding: 28px 28px 0;
+}
+
+.case-industry {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.65rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-bottom: 12px;
+}
+
+.case-industry.e-com { color: var(--cyan); }
+.case-industry.health { color: var(--green); }
+.case-industry.sales { color: var(--amber); }
+
+.case-title {
+  font-family: 'Bookman Old Style', 'Bookman', 'Libre Baskerville', 'URW Bookman L', Georgia, serif;
+  font-weight: 700;
+  font-size: 1rem;
+  letter-spacing: -0.01em;
+  margin-bottom: 12px;
+  line-height: 1.3;
+}
+
+.case-desc {
+  font-size: 0.83rem;
+  color: var(--text-mute);
+  line-height: 1.6;
+  padding-bottom: 24px;
+}
+
+.case-results {
+  border-top: 1px solid var(--border2);
+  padding: 20px 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.case-result-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.8rem;
+  color: var(--text-dim);
+}
+
+.case-result-item::before {
+  content: '';
+  width: 4px; height: 4px;
+  border-radius: 50%;
+  background: var(--cyan);
+  flex-shrink: 0;
+}
+
+.case-stat {
+  font-family: 'Bookman Old Style', 'Bookman', 'Libre Baskerville', 'URW Bookman L', Georgia, serif;
+  font-weight: 700;
+  font-size: 1.1rem;
+  margin-left: auto;
+}
+
+.case-stat.c { color: var(--cyan); }
+.case-stat.g { color: var(--green); }
+.case-stat.a { color: var(--amber); }
+
+/* ── TOOLS STRIP ── */
+.tools-section {
+  background: var(--bg2);
+  padding: 60px 5%;
+  border-top: 1px solid var(--border2);
+  border-bottom: 1px solid var(--border2);
+}
+
+.tools-label {
+  text-align: center;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.7rem;
+  color: var(--text-mute);
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  margin-bottom: 36px;
+}
+
+.tools-row {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.tool-badge {
+  background: var(--surface);
+  border: 1px solid var(--border2);
+  border-radius: 8px;
+  padding: 10px 18px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.78rem;
+  color: var(--text-dim);
+  letter-spacing: 0.03em;
+  transition: border-color 0.2s, color 0.2s;
+}
+
+.tool-badge:hover {
+  border-color: var(--border);
+  color: var(--text);
+}
+
+/* ── ABOUT ── */
+.about-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: center;
+}
+
+.about-left { }
+
+.about-quote {
+  font-family: 'Bookman Old Style', 'Bookman', 'Libre Baskerville', 'URW Bookman L', Georgia, serif;
+  font-size: clamp(1.4rem, 2.5vw, 2rem);
+  font-weight: 700;
+  line-height: 1.3;
+  letter-spacing: -0.02em;
+  margin-bottom: 28px;
+}
+
+.about-quote em {
+  font-style: normal;
+  color: var(--cyan);
+}
+
+.about-body {
+  color: var(--text-dim);
+  line-height: 1.8;
+  font-weight: 300;
+  font-size: 0.95rem;
+  margin-bottom: 36px;
+}
+
+.about-right {
+  position: relative;
+}
+
+.about-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 40px;
+  box-shadow: var(--glow);
+}
+
+.about-name {
+  font-family: 'Bookman Old Style', 'Bookman', 'Libre Baskerville', 'URW Bookman L', Georgia, serif;
+  font-weight: 800;
+  font-size: 1.8rem;
+  letter-spacing: -0.03em;
+  margin-bottom: 4px;
+}
+
+.about-role {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.75rem;
+  color: var(--cyan);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: 24px;
+}
+
+.about-skills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 24px;
+}
+
+.about-skill {
+  background: rgba(0,212,255,0.08);
+  border: 1px solid rgba(0,212,255,0.2);
+  color: var(--cyan);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.7rem;
+  padding: 5px 12px;
+  border-radius: 100px;
+  letter-spacing: 0.03em;
+}
+
+.about-divider {
+  height: 1px;
+  background: var(--border2);
+  margin: 24px 0;
+}
+
+.about-stat-row {
+  display: flex;
+  gap: 32px;
+}
+
+.about-stat-num {
+  font-family: 'Bookman Old Style', 'Bookman', 'Libre Baskerville', 'URW Bookman L', Georgia, serif;
+  font-weight: 800;
+  font-size: 1.6rem;
+  color: var(--text);
+  letter-spacing: -0.03em;
+}
+
+.about-stat-lbl {
+  font-size: 0.72rem;
+  color: var(--text-mute);
+  margin-top: 2px;
+}
+
+/* ── CTA SECTION ── */
+.cta-section {
+  padding: 120px 5%;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.cta-section::before {
+  content: '';
+  position: absolute;
+  width: 700px; height: 700px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(0,212,255,0.08) 0%, transparent 70%);
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+}
+
+.cta-section::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: 
+    linear-gradient(rgba(0,212,255,0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0,212,255,0.04) 1px, transparent 1px);
+  background-size: 40px 40px;
+  mask-image: radial-gradient(ellipse 60% 60% at 50% 50%, black 0%, transparent 100%);
+}
+
+.cta-inner {
+  position: relative;
+  z-index: 2;
+  max-width: 640px;
+  margin: 0 auto;
+}
+
+.cta-title {
+  font-family: 'Bookman Old Style', 'Bookman', 'Libre Baskerville', 'URW Bookman L', Georgia, serif;
+  font-weight: 800;
+  font-size: clamp(2rem, 4vw, 3.2rem);
+  letter-spacing: -0.03em;
+  line-height: 1.1;
+  margin-bottom: 20px;
+}
+
+.cta-title span { color: var(--cyan); }
+
+.cta-sub {
+  color: var(--text-dim);
+  font-size: 1rem;
+  font-weight: 300;
+  margin-bottom: 40px;
+  line-height: 1.7;
+}
+
+.cta-buttons {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+/* ── FOOTER ── */
+footer {
+  background: var(--bg2);
+  border-top: 1px solid var(--border2);
+  padding: 40px 5%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.footer-brand {
+  font-family: 'Bookman Old Style', 'Bookman', 'Libre Baskerville', 'URW Bookman L', Georgia, serif;
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: var(--text-dim);
+}
+
+.footer-brand span { color: var(--cyan); }
+
+.footer-copy {
+  font-size: 0.78rem;
+  color: var(--text-mute);
+  font-family: 'JetBrains Mono', monospace;
+}
+
+.footer-links {
+  display: flex;
+  gap: 24px;
+}
+
+.footer-links a {
+  font-size: 0.8rem;
+  color: var(--text-mute);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.footer-links a:hover { color: var(--cyan); }
+
+/* ── SCROLL REVEAL ── */
+.reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 1024px) {
+  .hero { grid-template-columns: 1fr; gap: 60px; }
+  .hero-right { order: -1; }
+  .float-badge.badge2 { display: none; }
+  .services-grid { grid-template-columns: 1fr; }
+  .services-header { grid-template-columns: 1fr; gap: 24px; }
+  .results-grid { grid-template-columns: 1fr; gap: 48px; }
+  .cases-grid { grid-template-columns: 1fr; }
+  .about-grid { grid-template-columns: 1fr; gap: 48px; }
+}
+
+@media (max-width: 768px) {
+  nav { padding: 0 20px; }
+  .nav-links { display: none; }
+  .hero { padding: 100px 20px 60px; }
+  .hero-stats { gap: 20px; flex-wrap: wrap; }
+  .section { padding: 70px 20px; }
+  .dash-metrics { grid-template-columns: repeat(3, 1fr); gap: 8px; }
+  .metrics-showcase { grid-template-columns: repeat(2, 1fr); }
+  .problems-grid { grid-template-columns: 1fr 1fr; }
+  .services-grid { grid-template-columns: 1fr; }
+  footer { flex-direction: column; gap: 16px; text-align: center; }
+  .float-badge { display: none; }
+  .about-stat-row { gap: 20px; }
+}
+</style>
+</head>
+<body>
+
+<!-- ── NAVIGATION ── -->
+<nav>
+  <div class="nav-logo">
+    <div class="logo-badge">AI</div>
+    Subh <span>AI Solutions</span>
+  </div>
+  <ul class="nav-links">
+    <li><a href="#services">Services</a></li>
+    <li><a href="#results">Results</a></li>
+    <li><a href="#cases">Case Studies</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#contact" class="nav-cta">Book Free Call</a></li>
+  </ul>
+</nav>
+
+<!-- ── HERO ── -->
+<section class="hero">
+  <div class="hero-orb1"></div>
+  <div class="hero-orb2"></div>
+
+  <div class="hero-left">
+    <div class="hero-eyebrow">
+      <span class="pulse-dot"></span>
+      AI Business Transformation
+    </div>
+
+    <h1>
+      Transform Your Business<br>with <em>AI</em>
+    </h1>
+
+    <p class="hero-sub">
+      Deploy intelligent chatbots, voicebots, and smart workflows that reduce costs, deliver 24/7 support, and free your team for what matters most.
+    </p>
+
+  </div>
+
+  <div class="hero-right">
+    <!-- Floating badges -->
+    <div class="float-badge badge1">
+      <div class="badge-icon green-bg">🤖</div>
+      <div class="badge-text">
+        <strong>AI Agent Active</strong>
+        <span>3 bots online · 0 errors</span>
+      </div>
+    </div>
+    <div class="float-badge badge2">
+      <div class="badge-icon cyan-bg">⚡</div>
+      <div class="badge-text">
+        <strong>Workflow Automated</strong>
+        <span>CRM synced · Lead captured</span>
+      </div>
+    </div>
+
+    <!-- Hero image frame with custom AI minion illustration -->
+    <div class="hero-image-frame">
+      <div class="hero-img-overlay"></div>
+
+      <!-- Custom SVG: AI Minion with circuit brain, headset, smile -->
+      <svg viewBox="0 0 520 420" xmlns="http://www.w3.org/2000/svg" class="hero-minion-svg" aria-label="AI assistant with headset">
+        <defs>
+          <radialGradient id="bgGrad" cx="50%" cy="60%" r="55%">
+            <stop offset="0%" stop-color="#0d1f40"/>
+            <stop offset="100%" stop-color="#050810"/>
+          </radialGradient>
+          <radialGradient id="bodyGrad" cx="45%" cy="40%" r="60%">
+            <stop offset="0%" stop-color="#ffe066"/>
+            <stop offset="100%" stop-color="#e6a800"/>
+          </radialGradient>
+          <radialGradient id="eyeGrad" cx="40%" cy="35%" r="55%">
+            <stop offset="0%" stop-color="#ffffff"/>
+            <stop offset="100%" stop-color="#c8d8f0"/>
+          </radialGradient>
+          <radialGradient id="brainGrad" cx="50%" cy="40%" r="55%">
+            <stop offset="0%" stop-color="#1a3a6e"/>
+            <stop offset="100%" stop-color="#0a1a3a"/>
+          </radialGradient>
+          <filter id="glow" x="-30%" y="-30%" width="160%" height="160%">
+            <feGaussianBlur stdDeviation="4" result="coloredBlur"/>
+            <feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge>
+          </filter>
+          <filter id="softglow" x="-20%" y="-20%" width="140%" height="140%">
+            <feGaussianBlur stdDeviation="2.5" result="coloredBlur"/>
+            <feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge>
+          </filter>
+          <clipPath id="bodyClip">
+            <ellipse cx="260" cy="240" rx="108" ry="135"/>
+          </clipPath>
+        </defs>
+
+        <!-- Background -->
+        <rect width="520" height="420" fill="url(#bgGrad)"/>
+
+        <!-- Subtle grid -->
+        <g opacity="0.06" stroke="#00d4ff" stroke-width="0.5">
+          <line x1="0" y1="60" x2="520" y2="60"/><line x1="0" y1="120" x2="520" y2="120"/>
+          <line x1="0" y1="180" x2="520" y2="180"/><line x1="0" y1="240" x2="520" y2="240"/>
+          <line x1="0" y1="300" x2="520" y2="300"/><line x1="0" y1="360" x2="520" y2="360"/>
+          <line x1="60" y1="0" x2="60" y2="420"/><line x1="120" y1="0" x2="120" y2="420"/>
+          <line x1="180" y1="0" x2="180" y2="420"/><line x1="240" y1="0" x2="240" y2="420"/>
+          <line x1="300" y1="0" x2="300" y2="420"/><line x1="360" y1="0" x2="360" y2="420"/>
+          <line x1="420" y1="0" x2="420" y2="420"/><line x1="480" y1="0" x2="480" y2="420"/>
+        </g>
+
+        <!-- Bottom glow pool -->
+        <ellipse cx="260" cy="395" rx="140" ry="22" fill="#00d4ff" opacity="0.07"/>
+
+        <!-- Body (minion torso) -->
+        <ellipse cx="260" cy="290" rx="90" ry="95" fill="url(#bodyGrad)"/>
+        <!-- Body shading -->
+        <ellipse cx="245" cy="275" rx="55" ry="60" fill="#fff" opacity="0.08"/>
+
+        <!-- Overalls / uniform -->
+        <path d="M175 340 Q180 300 200 285 Q230 272 260 272 Q290 272 320 285 Q340 300 345 340 Q335 370 260 378 Q185 370 175 340Z" fill="#1a3a8a" opacity="0.85"/>
+        <!-- Overalls highlight -->
+        <path d="M215 285 Q240 276 260 276 Q280 276 305 285 Q318 296 320 310 Q295 300 260 298 Q225 300 200 310 Q202 296 215 285Z" fill="#2a4faa" opacity="0.6"/>
+        <!-- Collar -->
+        <path d="M235 272 Q260 265 285 272 L280 290 Q260 283 240 290Z" fill="#f0c800"/>
+        <!-- Tie / badge -->
+        <rect x="252" y="295" width="16" height="22" rx="3" fill="#00d4ff" opacity="0.85"/>
+        <rect x="255" y="298" width="10" height="3" rx="1" fill="#fff" opacity="0.6"/>
+        <rect x="255" y="303" width="7" height="2" rx="1" fill="#fff" opacity="0.4"/>
+
+        <!-- HEAD -->
+        <ellipse cx="260" cy="195" rx="95" ry="100" fill="url(#bodyGrad)"/>
+        <!-- Head highlight -->
+        <ellipse cx="238" cy="165" rx="48" ry="42" fill="#fff" opacity="0.1"/>
+
+        <!-- ── CIRCUIT BRAIN (top of head, visible through transparent top) ── -->
+        <g clip-path="url(#bodyClip)"><!-- clip unused, just group --></g>
+        <!-- Brain dome - transparent window at top of head -->
+        <ellipse cx="260" cy="142" rx="60" ry="52" fill="url(#brainGrad)" opacity="0.92"/>
+        <ellipse cx="260" cy="142" rx="60" ry="52" fill="none" stroke="#00d4ff" stroke-width="1.5" opacity="0.5"/>
+        <!-- Brain highlight -->
+        <ellipse cx="248" cy="128" rx="28" ry="20" fill="#2a5ab0" opacity="0.4"/>
+
+        <!-- Circuit traces inside brain -->
+        <g filter="url(#softglow)" opacity="0.9">
+          <!-- horizontal traces -->
+          <polyline points="210,138 225,138 230,132 242,132 248,138 262,138" fill="none" stroke="#00d4ff" stroke-width="1.2" stroke-linecap="round"/>
+          <polyline points="262,138 272,138 278,132 294,132 300,138 312,138" fill="none" stroke="#00d4ff" stroke-width="1.2" stroke-linecap="round"/>
+          <polyline points="218,150 232,150 238,156 252,156 258,150 270,150" fill="none" stroke="#00ff9d" stroke-width="1" stroke-linecap="round"/>
+          <polyline points="268,150 278,150 284,156 295,156" fill="none" stroke="#00ff9d" stroke-width="1" stroke-linecap="round"/>
+          <!-- vertical bridges -->
+          <line x1="230" y1="132" x2="230" y2="122" stroke="#00d4ff" stroke-width="1.2"/>
+          <line x1="248" y1="138" x2="248" y2="150" stroke="#00d4ff" stroke-width="1.2"/>
+          <line x1="278" y1="132" x2="278" y2="122" stroke="#00d4ff" stroke-width="1.2"/>
+          <line x1="262" y1="138" x2="262" y2="150" stroke="#00ff9d" stroke-width="1"/>
+          <!-- top connector -->
+          <polyline points="230,122 244,118 260,116 276,118 278,122" fill="none" stroke="#00d4ff" stroke-width="1.2" stroke-linecap="round"/>
+          <!-- nodes / solder points -->
+          <circle cx="225" cy="138" r="2.5" fill="#00d4ff"/>
+          <circle cx="248" cy="138" r="2.5" fill="#00d4ff"/>
+          <circle cx="272" cy="138" r="2.5" fill="#00d4ff"/>
+          <circle cx="230" cy="132" r="2" fill="#fff" opacity="0.9"/>
+          <circle cx="278" cy="132" r="2" fill="#fff" opacity="0.9"/>
+          <circle cx="262" cy="150" r="2" fill="#00ff9d"/>
+          <circle cx="238" cy="156" r="2" fill="#00ff9d"/>
+          <circle cx="244" cy="118" r="2" fill="#ffbe00"/>
+          <circle cx="276" cy="118" r="2" fill="#ffbe00"/>
+          <!-- pulsing center chip -->
+          <rect x="252" y="128" width="16" height="12" rx="2" fill="#0a1a40" stroke="#00d4ff" stroke-width="1.2"/>
+          <line x1="256" y1="131" x2="256" y2="137" stroke="#00d4ff" stroke-width="0.8"/>
+          <line x1="260" y1="131" x2="260" y2="137" stroke="#00d4ff" stroke-width="0.8"/>
+          <line x1="264" y1="131" x2="264" y2="137" stroke="#00d4ff" stroke-width="0.8"/>
+        </g>
+        <!-- Brain rim glow -->
+        <ellipse cx="260" cy="142" rx="60" ry="52" fill="none" stroke="#00d4ff" stroke-width="2" opacity="0.3"/>
+
+        <!-- Goggles / glasses frame -->
+        <rect x="200" y="185" width="112" height="38" rx="19" fill="#1a1a2e" opacity="0.85"/>
+        <rect x="200" y="185" width="112" height="38" rx="19" fill="none" stroke="#00d4ff" stroke-width="2" opacity="0.7"/>
+        <!-- Left eye lens -->
+        <ellipse cx="232" cy="204" rx="22" ry="17" fill="url(#eyeGrad)"/>
+        <ellipse cx="232" cy="204" rx="22" ry="17" fill="none" stroke="#00d4ff" stroke-width="1.5"/>
+        <!-- Right eye lens -->
+        <ellipse cx="288" cy="204" rx="22" ry="17" fill="url(#eyeGrad)"/>
+        <ellipse cx="288" cy="204" rx="22" ry="17" fill="none" stroke="#00d4ff" stroke-width="1.5"/>
+        <!-- Bridge -->
+        <rect x="253" y="200" width="14" height="8" rx="4" fill="#1a1a2e"/>
+        <!-- Pupils - left -->
+        <ellipse cx="234" cy="205" rx="10" ry="11" fill="#1a3a6e"/>
+        <ellipse cx="234" cy="205" rx="6" ry="7" fill="#0a0e1a"/>
+        <circle cx="237" cy="202" r="2.5" fill="#fff" opacity="0.9"/>
+        <!-- Pupils - right -->
+        <ellipse cx="290" cy="205" rx="10" ry="11" fill="#1a3a6e"/>
+        <ellipse cx="290" cy="205" rx="6" ry="7" fill="#0a0e1a"/>
+        <circle cx="293" cy="202" r="2.5" fill="#fff" opacity="0.9"/>
+        <!-- Eye shine -->
+        <circle cx="228" cy="200" r="3" fill="#00d4ff" opacity="0.3"/>
+        <circle cx="284" cy="200" r="3" fill="#00d4ff" opacity="0.3"/>
+        <!-- Side goggle straps -->
+        <rect x="312" y="199" width="18" height="10" rx="5" fill="#888" opacity="0.7"/>
+        <rect x="190" y="199" width="18" height="10" rx="5" fill="#888" opacity="0.7"/>
+
+        <!-- BIG SMILE -->
+        <path d="M228 240 Q260 268 292 240" fill="none" stroke="#1a1a2e" stroke-width="4" stroke-linecap="round"/>
+        <path d="M230 241 Q260 266 290 241" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round" opacity="0.9"/>
+        <!-- Teeth -->
+        <path d="M238 248 Q260 264 282 248 Q280 258 260 262 Q240 258 238 248Z" fill="#fff" opacity="0.85"/>
+        <!-- Cheek blushes -->
+        <ellipse cx="215" cy="236" rx="14" ry="8" fill="#ff9966" opacity="0.3"/>
+        <ellipse cx="305" cy="236" rx="14" ry="8" fill="#ff9966" opacity="0.3"/>
+
+        <!-- ── HEADSET ── -->
+        <!-- Headband arc -->
+        <path d="M168 200 Q172 108 260 100 Q348 108 352 200" fill="none" stroke="#333" stroke-width="9" stroke-linecap="round"/>
+        <path d="M170 200 Q174 110 260 102 Q346 110 350 200" fill="none" stroke="#555" stroke-width="5" stroke-linecap="round"/>
+        <!-- Headband highlight -->
+        <path d="M200 130 Q260 108 320 130" fill="none" stroke="#888" stroke-width="2" opacity="0.5"/>
+
+        <!-- Left ear cup -->
+        <ellipse cx="168" cy="207" rx="18" ry="24" fill="#222" stroke="#444" stroke-width="2"/>
+        <ellipse cx="168" cy="207" rx="11" ry="16" fill="#1a1a2e"/>
+        <ellipse cx="168" cy="207" rx="6" ry="9" fill="#00d4ff" opacity="0.2"/>
+        <!-- Right ear cup -->
+        <ellipse cx="352" cy="207" rx="18" ry="24" fill="#222" stroke="#444" stroke-width="2"/>
+        <ellipse cx="352" cy="207" rx="11" ry="16" fill="#1a1a2e"/>
+        <ellipse cx="352" cy="207" rx="6" ry="9" fill="#00d4ff" opacity="0.2"/>
+
+        <!-- Mic arm -->
+        <path d="M352 218 Q375 230 378 252 Q380 268 368 272" fill="none" stroke="#444" stroke-width="5" stroke-linecap="round"/>
+        <path d="M352 218 Q375 230 378 252 Q380 268 368 272" fill="none" stroke="#666" stroke-width="2.5" stroke-linecap="round"/>
+        <!-- Mic capsule -->
+        <ellipse cx="365" cy="276" rx="12" ry="8" fill="#222" stroke="#00d4ff" stroke-width="1.5"/>
+        <ellipse cx="365" cy="276" rx="7" ry="5" fill="#00d4ff" opacity="0.25"/>
+        <!-- Mic LED dot -->
+        <circle cx="365" cy="276" r="2.5" fill="#00ff9d" filter="url(#softglow)">
+          <animate attributeName="opacity" values="1;0.3;1" dur="1.8s" repeatCount="indefinite"/>
+        </circle>
+
+        <!-- ── HANDS ── -->
+        <!-- Left hand (thumbs up / wave) -->
+        <ellipse cx="168" cy="328" rx="22" ry="16" fill="url(#bodyGrad)" transform="rotate(-20,168,328)"/>
+        <ellipse cx="155" cy="316" rx="9" ry="6" fill="url(#bodyGrad)" transform="rotate(-35,155,316)"/>
+        <ellipse cx="152" cy="330" rx="8" ry="6" fill="url(#bodyGrad)" transform="rotate(-10,152,330)"/>
+        <!-- Right hand (pointing / open) -->
+        <ellipse cx="352" cy="328" rx="22" ry="16" fill="url(#bodyGrad)" transform="rotate(20,352,328)"/>
+        <ellipse cx="365" cy="316" rx="9" ry="6" fill="url(#bodyGrad)" transform="rotate(35,365,316)"/>
+        <ellipse cx="368" cy="330" rx="8" ry="6" fill="url(#bodyGrad)" transform="rotate(10,368,330)"/>
+
+        <!-- ── CHAT BUBBLE — Customer (LEFT side) ── -->
+        <g filter="url(#softglow)">
+          <rect x="8" y="78" width="148" height="68" rx="14" fill="rgba(17,24,39,0.92)" stroke="#00d4ff" stroke-width="1.5"/>
+          <!-- bubble tail pointing right toward minion -->
+          <path d="M156 130 L170 148 L156 148Z" fill="rgba(17,24,39,0.92)"/>
+          <path d="M156 130 L170 148" stroke="#00d4ff" stroke-width="1.5" stroke-linecap="round"/>
+          <path d="M156 148 L170 148" stroke="rgba(17,24,39,0.92)" stroke-width="3"/>
+          <text x="22" y="103" font-family="'DM Sans',sans-serif" font-size="9.5" fill="#8899b8">Customer</text>
+          <text x="18" y="119" font-family="'DM Sans',sans-serif" font-size="10.5" fill="#e8edf8" font-weight="600">Hi! I need help with</text>
+          <text x="18" y="133" font-family="'DM Sans',sans-serif" font-size="10.5" fill="#e8edf8" font-weight="600">my order 🙂</text>
+        </g>
+
+        <!-- ── AI RESPONSE BUBBLE — (RIGHT side) ── -->
+        <g filter="url(#softglow)">
+          <rect x="364" y="78" width="148" height="76" rx="14" fill="rgba(0,40,80,0.90)" stroke="#00ff9d" stroke-width="1.5"/>
+          <!-- bubble tail pointing left toward minion -->
+          <path d="M364 122 L350 140 L364 140Z" fill="rgba(0,40,80,0.90)"/>
+          <path d="M364 122 L350 140" stroke="#00ff9d" stroke-width="1.5" stroke-linecap="round"/>
+          <path d="M364 140 L350 140" stroke="rgba(0,40,80,0.90)" stroke-width="3"/>
+          <text x="376" y="103" font-family="'JetBrains Mono',monospace" font-size="8" fill="#00ff9d" letter-spacing="1">AI · Online</text>
+          <text x="372" y="119" font-family="'DM Sans',sans-serif" font-size="10" fill="#e8edf8">Sure! Your order</text>
+          <text x="372" y="133" font-family="'DM Sans',sans-serif" font-size="10" fill="#e8edf8">#4821 arrives</text>
+          <text x="372" y="147" font-family="'DM Sans',sans-serif" font-size="10" fill="#00d4ff" font-weight="600">today by 5 PM ✓</text>
+        </g>
+
+        <!-- ── CIRCUIT SPARKS / floating data ── -->
+        <g filter="url(#glow)" opacity="0.7">
+          <circle cx="130" cy="58" r="3" fill="#00d4ff"><animate attributeName="opacity" values="0.2;1;0.2" dur="2.4s" begin="0s" repeatCount="indefinite"/></circle>
+          <circle cx="395" cy="48" r="2.5" fill="#00ff9d"><animate attributeName="opacity" values="0.2;1;0.2" dur="1.9s" begin="0.5s" repeatCount="indefinite"/></circle>
+          <circle cx="80" cy="340" r="2" fill="#ffbe00"><animate attributeName="opacity" values="0.2;1;0.2" dur="2.8s" begin="0.8s" repeatCount="indefinite"/></circle>
+          <circle cx="445" cy="320" r="3" fill="#00d4ff"><animate attributeName="opacity" values="0.2;1;0.2" dur="2.1s" begin="0.3s" repeatCount="indefinite"/></circle>
+          <circle cx="460" cy="58" r="2" fill="#ffbe00"><animate attributeName="opacity" values="0.2;1;0.2" dur="3.2s" begin="1.1s" repeatCount="indefinite"/></circle>
+          <circle cx="55" cy="180" r="2" fill="#00ff9d"><animate attributeName="opacity" values="0.2;1;0.2" dur="2.6s" begin="1.5s" repeatCount="indefinite"/></circle>
+        </g>
+
+        <!-- Body shadow at bottom -->
+        <ellipse cx="260" cy="376" rx="88" ry="12" fill="#000" opacity="0.35"/>
+      </svg>
+
+      <!-- Mini workflow bar at bottom -->
+      <div class="img-workflow-bar">
+        <div class="workflow-node">Lead In</div>
+        <div class="workflow-arrow">→</div>
+        <div class="workflow-node">AI Qualify</div>
+        <div class="workflow-arrow">→</div>
+        <div class="workflow-node">CRM</div>
+        <div class="workflow-arrow">→</div>
+        <div class="workflow-node">WhatsApp</div>
+        <div class="workflow-arrow">→</div>
+        <div class="workflow-node">Close ✓</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── PROBLEMS ── -->
+<section class="problems-section section">
+  <div class="section-eyebrow">The Challenge</div>
+  <h2 class="section-title">Business Problems We Solve</h2>
+  <p class="section-sub">Most businesses are losing revenue, time, and customers to problems that AI can fix today.</p>
+
+  <div class="problems-grid reveal">
+    <div class="problem-card">
+      <span class="problem-icon">⏰</span>
+      <div class="problem-title">Slow Response Times</div>
+      <div class="problem-desc">Customers wait hours for replies. Every delay is a lost sale or a frustrated client ready to leave.</div>
+    </div>
+    <div class="problem-card">
+      <span class="problem-icon">📞</span>
+      <div class="problem-title">Overwhelmed Support Teams</div>
+      <div class="problem-desc">Your team spends 60% of time on repetitive questions that an AI could handle in milliseconds.</div>
+    </div>
+    <div class="problem-card">
+      <span class="problem-icon">🌙</span>
+      <div class="problem-title">No After-Hours Coverage</div>
+      <div class="problem-desc">Leads and customers contacting you outside office hours get silence — and go to your competitor.</div>
+    </div>
+    <div class="problem-card">
+      <span class="problem-icon">🔗</span>
+      <div class="problem-title">Disconnected Systems</div>
+      <div class="problem-desc">CRM, email, WhatsApp, ERP — siloed tools mean manual work, missed follow-ups, and lost data.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ── TOOLS USED ── -->
+<div class="tools-section">
+  <div class="tools-label">Built with industry-leading AI platforms</div>
+  <div class="tools-row">
+    <div class="tool-badge">Voiceflow</div>
+    <div class="tool-badge">Botpress</div>
+    <div class="tool-badge">Make.com</div>
+    <div class="tool-badge">n8n</div>
+    <div class="tool-badge">OpenAI GPT-4</div>
+    <div class="tool-badge">ElevenLabs</div>
+    <div class="tool-badge">Twilio</div>
+    <div class="tool-badge">Zapier</div>
+    <div class="tool-badge">WhatsApp API</div>
+    <div class="tool-badge">HubSpot</div>
+  </div>
+</div>
+
+<!-- ── SERVICES ── -->
+<section class="section" id="services">
+  <div class="services-header reveal">
+    <div>
+      <div class="section-eyebrow">What We Build</div>
+      <h2 class="section-title">AI Services That Deliver Results</h2>
+    </div>
+    <p class="section-sub">From chatbots to full business automation — practical AI solutions built for your specific needs.</p>
+  </div>
+
+  <div class="services-grid">
+    <div class="service-card reveal">
+      <div class="service-icon-wrap s1">🤖</div>
+      <div class="service-name">AI Customer Support</div>
+      <div class="service-desc">Intelligent chatbots that handle inquiries, resolve issues, and delight customers — across every channel, around the clock.</div>
+      <div class="service-tags">
+        <span class="tag">Website Chatbots</span>
+        <span class="tag">WhatsApp AI</span>
+        <span class="tag">Knowledge Base Bots</span>
+        <span class="tag">Service Automation</span>
+      </div>
+    </div>
+
+    <div class="service-card reveal">
+      <div class="service-icon-wrap s2">🎙️</div>
+      <div class="service-name">AI Voice Solutions</div>
+      <div class="service-desc">Voicebots that handle inbound calls, book appointments, qualify leads, and answer FAQs — without a human on hold.</div>
+      <div class="service-tags">
+        <span class="tag">AI Receptionists</span>
+        <span class="tag">Call Handling</span>
+        <span class="tag">Appointment Booking</span>
+        <span class="tag">Lead Qualification</span>
+      </div>
+    </div>
+
+    <div class="service-card reveal">
+      <div class="service-icon-wrap s3">⚙️</div>
+      <div class="service-name">Business Automation</div>
+      <div class="service-desc">Connect your tools and eliminate manual work. From lead capture to document processing — automated end-to-end.</div>
+      <div class="service-tags">
+        <span class="tag">CRM Automation</span>
+        <span class="tag">Lead Management</span>
+        <span class="tag">Email Automation</span>
+        <span class="tag">Workflow Design</span>
+      </div>
+    </div>
+
+    <div class="service-card reveal">
+      <div class="service-icon-wrap s4">🧭</div>
+      <div class="service-name">AI Strategy & Adoption</div>
+      <div class="service-desc">Not sure where to start? Get a clear AI roadmap, team training, and expert guidance to navigate your AI transformation.</div>
+      <div class="service-tags">
+        <span class="tag">AI Readiness Audit</span>
+        <span class="tag">Roadmap</span>
+        <span class="tag">Team Training</span>
+        <span class="tag">Process Optimization</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── RESULTS ── -->
+<section class="results-section section" id="results">
+  <div class="results-grid">
+    <div class="reveal">
+      <div class="section-eyebrow">Proven Outcomes</div>
+      <h2 class="section-title">What Businesses Achieve</h2>
+      <ul class="results-list">
+        <li class="result-item"><div class="result-check">✓</div>24/7 customer support without adding headcount</li>
+        <li class="result-item"><div class="result-check">✓</div>70% faster average response times</li>
+        <li class="result-item"><div class="result-check">✓</div>40% reduction in support & operational costs</li>
+        <li class="result-item"><div class="result-check">✓</div>Increased lead conversion through instant follow-up</li>
+        <li class="result-item"><div class="result-check">✓</div>Improved customer satisfaction scores</li>
+        <li class="result-item"><div class="result-check">✓</div>Scalable processes that grow with your business</li>
+        <li class="result-item"><div class="result-check">✓</div>Teams freed from repetitive tasks — focused on growth</li>
+      </ul>
+    </div>
+
+    <div class="metrics-showcase reveal">
+      <div class="metric-showcase-card m1">
+        <div class="showcase-val">70%</div>
+        <div class="showcase-label">Faster Response Time</div>
+      </div>
+      <div class="metric-showcase-card m2">
+        <div class="showcase-val">24/7</div>
+        <div class="showcase-label">Always-On Support</div>
+      </div>
+      <div class="metric-showcase-card m3">
+        <div class="showcase-val">40%</div>
+        <div class="showcase-label">Cost Reduction</div>
+      </div>
+      <div class="metric-showcase-card m4">
+        <div class="showcase-val">3×</div>
+        <div class="showcase-label">Lead Conversion Rate</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── CASE STUDIES ── -->
+<section class="section" id="cases">
+  <div class="reveal">
+    <div class="section-eyebrow">Case Studies</div>
+    <h2 class="section-title">AI in Action</h2>
+    <p class="section-sub">Real-world demonstrations of what AI can do for businesses like yours.</p>
+  </div>
+
+  <div class="cases-grid">
+    <div class="case-card reveal">
+      <div class="case-header">
+        <div class="case-industry e-com">E-Commerce · Demo Project</div>
+        <div class="case-title">AI Customer Support for an Online Store</div>
+        <div class="case-desc">Built a fully autonomous AI support system handling order tracking, returns, product queries, and complaints — deployed on website chat and WhatsApp simultaneously.</div>
+      </div>
+      <div class="case-results">
+        <div class="case-result-item">
+          Support workload reduction
+          <div class="case-stat c">60%</div>
+        </div>
+        <div class="case-result-item">
+          Instant order tracking
+          <div class="case-stat c">Auto</div>
+        </div>
+        <div class="case-result-item">
+          Returns processed without agent
+          <div class="case-stat c">85%</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="case-card reveal">
+      <div class="case-header">
+        <div class="case-industry health">Healthcare · Demo Project</div>
+        <div class="case-title">AI Voice Receptionist for a Clinic</div>
+        <div class="case-desc">Deployed a voicebot that answers inbound calls, books appointments using real-time calendar availability, answers FAQs, and handles after-hours calls 24/7.</div>
+      </div>
+      <div class="case-results">
+        <div class="case-result-item">
+          Appointments booked by AI
+          <div class="case-stat g">100%</div>
+        </div>
+        <div class="case-result-item">
+          After-hours calls handled
+          <div class="case-stat g">24/7</div>
+        </div>
+        <div class="case-result-item">
+          Missed calls eliminated
+          <div class="case-stat g">✓</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="case-card reveal">
+      <div class="case-header">
+        <div class="case-industry sales">B2B Sales · Demo Project</div>
+        <div class="case-title">AI Lead Qualification System</div>
+        <div class="case-desc">Designed an AI-powered pipeline that captures inbound leads, scores them by fit and intent, sends personalised follow-ups, and books discovery calls — fully automated.</div>
+      </div>
+      <div class="case-results">
+        <div class="case-result-item">
+          Leads captured automatically
+          <div class="case-stat a">Auto</div>
+        </div>
+        <div class="case-result-item">
+          Prospect scoring accuracy
+          <div class="case-stat a">92%</div>
+        </div>
+        <div class="case-result-item">
+          Meetings booked without SDR
+          <div class="case-stat a">3×</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── ABOUT ── -->
+<section class="section" id="about" style="background: var(--bg2); border-top: 1px solid var(--border2);">
+  <div class="about-grid">
+    <div class="about-left reveal">
+      <div class="section-eyebrow">About</div>
+      <div class="about-quote">
+        I help businesses implement <em>practical AI</em> that delivers measurable results.
+      </div>
+      <p class="about-body">
+        Hi, I'm Subhash Chandra. My focus is building AI solutions that work in the real world — not demos that impress but don't deliver. From customer support automation and AI voice assistants to intelligent workflows and full organisational AI adoption, I help businesses move fast, reduce cost, and scale with confidence.
+      </p>
+      <p class="about-body" style="margin-top: -16px;">
+        I work with tools like Voiceflow, Botpress, Make.com, n8n, and leading LLM APIs to build solutions that are practical, affordable, and integrated with the tools your team already uses.
+      </p>
+      <a href="#contact" class="btn-primary" style="display: inline-flex; margin-top: 8px;">Let's Build Together →</a>
+    </div>
+
+    <div class="about-right reveal">
+      <div class="about-card">
+        <div class="about-name">Subhash Chandra</div>
+        <div class="about-role">AI Solutions Architect & Automation Specialist</div>
+
+        <div class="about-divider"></div>
+
+        <div class="about-stat-row">
+          <div>
+            <div class="about-stat-num">15+</div>
+            <div class="about-stat-lbl">AI Projects Delivered</div>
+          </div>
+          <div>
+            <div class="about-stat-num">4+</div>
+            <div class="about-stat-lbl">Industries Served</div>
+          </div>
+          <div>
+            <div class="about-stat-num">100%</div>
+            <div class="about-stat-lbl">Results-Focused</div>
+          </div>
+        </div>
+
+        <div class="about-divider"></div>
+
+        <div class="about-skills">
+          <span class="about-skill">AI Chatbots</span>
+          <span class="about-skill">Voicebots</span>
+          <span class="about-skill">Workflow Automation</span>
+          <span class="about-skill">CRM Integration</span>
+          <span class="about-skill">WhatsApp AI</span>
+          <span class="about-skill">AI Strategy</span>
+          <span class="about-skill">Team Training</span>
+          <span class="about-skill">Process Design</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── FINAL CTA ── -->
+<section class="cta-section" id="contact">
+  <div class="cta-inner reveal">
+    <div class="section-eyebrow" style="justify-content: center;">Start Your AI Journey</div>
+    <h2 class="cta-title">Ready to <span>Automate</span> &<br>Grow Faster?</h2>
+    <p class="cta-sub">Book a free 30-minute AI consultation. We'll audit your business, identify the highest-impact AI opportunities, and outline a practical roadmap — no jargon, no pressure.</p>
+    <div class="cta-buttons">
+      <a href="mailto:contact@shubhasai.com" class="btn-primary">📅 Book Free Consultation</a>
+      <a href="#services" class="btn-secondary">Explore Services →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ── FOOTER ── -->
+<footer>
+  <div class="footer-brand">Subhash <span>AI Solutions</span></div>
+  <div class="footer-copy">© 2025 · Built with purpose, powered by AI</div>
+  <div class="footer-links">
+    <a href="#services">Services</a>
+    <a href="#cases">Case Studies</a>
+    <a href="#contact">Contact</a>
+  </div>
+</footer>
+
+<script>
+// Scroll reveal
+const reveals = document.querySelectorAll('.reveal');
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach((entry, i) => {
+    if (entry.isIntersecting) {
+      setTimeout(() => {
+        entry.target.classList.add('visible');
+      }, 80);
+      observer.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+reveals.forEach(el => observer.observe(el));
+
+// Stagger sibling reveals
+document.querySelectorAll('.services-grid, .cases-grid, .problems-grid, .metrics-showcase').forEach(grid => {
+  const children = grid.querySelectorAll('.reveal');
+  children.forEach((child, i) => {
+    child.style.transitionDelay = `${i * 0.1}s`;
+  });
+});
+
+// Animated counter for stat numbers in hero
+function animateCounter(el, target, suffix = '', duration = 1800) {
+  const start = performance.now();
+  const isFloat = target % 1 !== 0;
+  const update = (time) => {
+    const progress = Math.min((time - start) / duration, 1);
+    const eased = 1 - Math.pow(1 - progress, 3);
+    const current = isFloat ? (eased * target).toFixed(1) : Math.round(eased * target);
+    el.textContent = current + suffix;
+    if (progress < 1) requestAnimationFrame(update);
+  };
+  requestAnimationFrame(update);
+}
+
+// Trigger counters when hero stats visible
+const statNums = document.querySelectorAll('.stat-num');
+const statData = [
+  { val: 70, suffix: '%' },
+  { val: 24, suffix: '/7' },
+  { val: 40, suffix: '%' },
+  { val: 3, suffix: '×' }
+];
+
+const statsObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      statNums.forEach((el, i) => {
+        const d = statData[i];
+        if (d) animateCounter(el, d.val, d.suffix);
+      });
+      statsObserver.disconnect();
+    }
+  });
+}, { threshold: 0.5 });
+
+if (statNums[0]) statsObserver.observe(statNums[0].closest('.hero-stats'));
+
+// Typewriter chat effect
+const chatBotBubble = document.querySelector('.chat-bubble.bot-bubble');
+if (chatBotBubble) {
+  const fullText = chatBotBubble.textContent;
+  chatBotBubble.textContent = '';
+  let i = 0;
+  setTimeout(() => {
+    const interval = setInterval(() => {
+      chatBotBubble.textContent = fullText.slice(0, ++i);
+      if (i >= fullText.length) clearInterval(interval);
+    }, 28);
+  }, 1800);
+}
+</script>
+</body>
+</html>
